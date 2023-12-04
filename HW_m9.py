@@ -82,3 +82,4 @@ decorated_phone_func = input_error(phone_func)
 if __name__ == '__main__':
     print(f'Hello :)\n\n{command_list}')
     main()
+
