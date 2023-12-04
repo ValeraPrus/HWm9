@@ -1,6 +1,6 @@
 exit_list = ['good bye', 'close', 'exit']
 
-command_list = f'Command list:\n-hello\n-add ...\
+command_list = 'Command list:\n-hello\n-add ...\
           \n-change ...\n-phone ....\n-show all\
           \n-good bye\n-close\n-exit'
 
@@ -36,9 +36,9 @@ def input_error(func):
             result = func(*args, **kwargs)
             return result
         except IndexError:
-            return f'-Give me name and phone please'
+            return '-Give me name and phone please'
         except KeyError:
-            return f'-Name not found'
+            return '-Name not found'
 
     return inner
 
@@ -64,11 +64,11 @@ def phone_func(user_date):
 
 
 def exit_func ():
-    return f'-Good bye!'
+    return '-Good bye!'
 
 
 def hello_func():
-    return f'-How can I help you?'
+    return '-How can I help you?'
 
 
 def show_all_func():
