@@ -29,7 +29,6 @@ def main():
             print(f'-Wrong command\n\n{command_list}')
 
 
-
 def input_error(func):
     def inner(*args, **kwargs):
         try:
@@ -50,7 +49,7 @@ def add_func(user_date):
     else:
         return f'-Name "{user_date[0]}" has already created'
 
-    
+
 def change_func(user_date):
     if user_date[0] in phone_dict:
         phone_dict[user_date[0]] = user_date[1]
@@ -63,7 +62,7 @@ def phone_func(user_date):
     return f'- {phone_dict[user_date[0]]}'
 
 
-def exit_func ():
+def exit_func():
     return '-Good bye!'
 
 
@@ -74,13 +73,10 @@ def hello_func():
 def show_all_func():
     return phone_dict
 
+
 decorated_add_func = input_error(add_func)
 decorated_change_func = input_error(change_func)
 decorated_phone_func = input_error(phone_func)
-
-
-
-
 
 
 if __name__ == '__main__':
