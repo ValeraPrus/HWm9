@@ -18,11 +18,11 @@ def main():
         elif 'hello' in user:
             print(hello_func())
         elif 'add ' in user:
-            print(decorated_add_func(user_date))
+            print(add_func(user_date))
         elif 'change ' in user:
-            print(decorated_change_func(user_date))
+            print(change_func(user_date))
         elif 'phone ' in user:
-            print(decorated_phone_func(user_date))
+            print(phone_func(user_date))
         elif 'show all' in user:
             print(show_all_func())
         else:
@@ -31,6 +31,13 @@ def main():
 
 def input_error(func):
     def inner(*args, **kwargs):
+        if func == add_func:
+            if args[0] in phone_dict:
+                return f'-Name "{args[0]}" has already created'
+        if func == change_func:
+            if not args[0] in phone_dict:
+                return f'-Name "{args[0]}" not found'
+
         try:
             result = func(*args, **kwargs)
             return result
@@ -42,22 +49,17 @@ def input_error(func):
     return inner
 
 
+@input_error
 def add_func(user_date):
-    if not user_date[0] in phone_dict:
-        phone_dict[user_date[0]] = user_date[1]
-        return f'-New contact "{user_date[0]}" added'
-    else:
-        return f'-Name "{user_date[0]}" has already created'
+    return f'-New contact "{user_date[0]}" added'
 
 
+@input_error
 def change_func(user_date):
-    if user_date[0] in phone_dict:
-        phone_dict[user_date[0]] = user_date[1]
-        return f'- Number of "{user_date[0]}" changed'
-    else:
-        return f'-Name "{user_date[0]}" not found'
+    return f'- Number of "{user_date[0]}" changed'
 
 
+@input_error
 def phone_func(user_date):
     return f'- {phone_dict[user_date[0]]}'
 
@@ -72,11 +74,6 @@ def hello_func():
 
 def show_all_func():
     return phone_dict
-
-
-decorated_add_func = input_error(add_func)
-decorated_change_func = input_error(change_func)
-decorated_phone_func = input_error(phone_func)
 
 
 if __name__ == '__main__':
