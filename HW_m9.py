@@ -31,32 +31,33 @@ def main():
 
 def input_error(func):
     def inner(*args, **kwargs):
-        if func == add_func:
-            if args[0] in phone_dict:
-                return f'-Name "{args[0]}" has already created'
-        if func == change_func:
-            if not args[0] in phone_dict:
-                return f'-Name "{args[0]}" not found'
-
         try:
             result = func(*args, **kwargs)
             return result
         except IndexError:
-            return '-Give me name and phone please'
+            return '- Give me name and phone please'
         except KeyError:
-            return '-Name not found'
+            return '- Name not found'
 
     return inner
 
 
 @input_error
 def add_func(user_date):
-    return f'-New contact "{user_date[0]}" added'
+    if not user_date[0] in phone_dict:
+        phone_dict[user_date[0]] = user_date[1]
+        return f'- New contact "{user_date[0]}" added'
+    else:
+        return f'- Name "{user_date[0]}" has already created'
 
 
 @input_error
 def change_func(user_date):
-    return f'- Number of "{user_date[0]}" changed'
+    if user_date[0] in phone_dict:
+        phone_dict[user_date[0]] = user_date[1]
+        return f'- Number of "{user_date[0]}" changed'
+    else:
+        return f'- Name "{user_date[0]}" not found'
 
 
 @input_error
@@ -65,11 +66,11 @@ def phone_func(user_date):
 
 
 def exit_func():
-    return '-Good bye!'
+    return '- Good bye!'
 
 
 def hello_func():
-    return '-How can I help you?'
+    return '- How can I help you?'
 
 
 def show_all_func():
@@ -77,6 +78,7 @@ def show_all_func():
 
 
 if __name__ == '__main__':
-    print(f'Hello :)\n\n{command_list}')
+    print(f'- Hello :)\n\n{command_list}')
     main()
+
 
