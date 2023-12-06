@@ -26,7 +26,7 @@ def main():
         elif 'show all' in user:
             print(show_all_func())
         else:
-            print(f'-Wrong command\n\n{command_list}')
+            print('- Wrong command')
 
 
 def input_error(func):
