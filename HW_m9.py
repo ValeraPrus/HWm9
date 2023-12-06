@@ -9,7 +9,7 @@ phone_dict = {}
 
 def main():
     while True:
-        user = input().lower()
+        user = input('>>> ').lower()
         user_date = user.split(' ')
         user_date.pop(0)
         if user in exit_list:
