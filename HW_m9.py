@@ -50,8 +50,9 @@ def add_func(user_date):
 
 @input_error
 def change_func(user_date):
+    value = user_date[1]
     del phone_dict[user_date[0]]
-    phone_dict[user_date[0]] = user_date[1]
+    phone_dict[user_date[0]] = value
     return f'- Number of "{user_date[0]}" changed'
 
 
